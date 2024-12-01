@@ -1,13 +1,15 @@
 #pragma once
 
+#include "Particle.hpp"
 #include "Emitter.hpp"
 #include "ofMain.h"
-#include <memory>
 #include <vector>
 
 class ofApp : public ofBaseApp{
 
 	public:
+		~ofApp() { delete emitter; };
+
 		void setup();
 		void update();
 		void draw();
@@ -25,5 +27,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 	private:
-		std::unique_ptr<Emitter> emitter;
+		// std::vector<Particle> particles;
+		Emitter* emitter;
 };

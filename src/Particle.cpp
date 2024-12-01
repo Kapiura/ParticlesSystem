@@ -1,19 +1,31 @@
 #include "Particle.hpp"
 
-void Particle::update()
+Particle::Particle(
+    glm::vec3 pos,
+    glm::vec3 vel,
+    ofColor col,
+    float life,
+    float rad)
+    : position(pos), velocity(vel), color(col), lifeTime(life), radius(rad)
+    {
+        acceleration = glm::vec3(0);
+    }
+
+void Particle::update(float deltaTime)
 {
-    velocity += acceleration;
-    position += velocity;
-    lifeTime -= ofGetLastFrameTime();
-    if (lifeTime <= 0)
-        isAlive = false;
+    velocity += acceleration * deltaTime;
+    position += velocity * deltaTime;
+    acceleration = glm::vec3(0);
+    lifeTime -= deltaTime;
 }
 
-void Particle::draw()
+void Particle::draw() const
 {
-    if (isAlive)
-    {
-        ofSetColor(color);
-        ofDrawCircle(position, size);
-    }
+    ofSetColor(color);
+    ofDrawSphere(position, radius);
+}
+
+void Particle::changeAlphaColor(float a)
+{
+    color.a = a;
 }

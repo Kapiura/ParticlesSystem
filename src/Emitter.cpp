@@ -1,32 +1,48 @@
 #include "Emitter.hpp"
-#include "ofMain.h"
-#include <algorithm>
+#include "Particle.hpp"
+#include <utility>
 
-void Emitter::update()
+
+Particle Emitter::emit()
 {
-  float currentTime = ofGetElapsedTimef();
-
-  if (currentTime - lastTime >= (1.0f / rate))
-  {
-    lastTime = currentTime;
-    glm::vec3 velocity = glm::vec3(ofRandom(-1, 1), ofRandom(-1, 1), 0);
-    ofColor color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
-    particles.push_back(Particle(position, velocity, color, 5, 5.0f));
-  }
-
-  for (auto &p : particles)
-    p.update();
-
-  particles.erase(
-    std::remove_if(
-        particles.begin(),
-        particles.end(),
-        [](const Particle &p) { return !p.alive(); }),
-        particles.end());
+  return Particle(
+    glm::vec3(emitPositon),                                              // vec pos
+    glm::vec3(ofRandom(-1,1), ofRandom(-1,1), 0) * ofRandom(50, 100),   // vec velocity
+    ofColor(255, 255, ofRandom(0,255)),                                 // color
+    ofRandom(1, 5),                                                     // life time
+    ofRandom(1,10));
 }
 
-void Emitter::draw()
+void Emitter::update(float deltaTime)
 {
-  for (auto &p : particles)
-    p.draw();
+  if(particles.size() < 1000)
+    particles.push_back(emit());
+
+  for(auto& el: particles)
+  {
+    el.update(deltaTime);
+    if(el.isDead())
+    {
+      deadParticles.push_back(el);
+    }
+  }
+
+  particles.erase(std::remove_if(
+    particles.begin(),
+    particles.end(),
+    [](Particle& p) { return p.isDead(); }), particles.end());
+
+  for(auto& el: particles)
+    el.changeAlphaColor(el.getAlpha() - 0.2f);
+
+  deadParticles.erase(std::remove_if(
+    deadParticles.begin(),
+    deadParticles.end(),
+    [](Particle& p) { return p.isAlphaZero(); }), deadParticles.end());
+
+}
+void Emitter::draw() const
+{
+  for(auto& el: particles)
+    el.draw();
 }

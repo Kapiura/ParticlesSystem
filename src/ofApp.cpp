@@ -1,5 +1,4 @@
 #include "ofApp.h"
-#include <memory>
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -8,19 +7,40 @@ void ofApp::setup()
   ofEnableDepthTest();
   ofEnableLighting();
 
-  emitter = std::make_unique<Emitter>(glm::vec3(400, 300, 0), 5);
+  emitter = new Emitter(glm::vec3(ofGetWidth()/ 2, ofGetHeight()/2, 0));
+    // glm::vec3(0, 1, 0) * ofRandom(50, 100));
+
+
+  // for (int i = 0; i < 1000; i++)
+  //   particles.push_back({
+  //   glm::vec3(ofGetWidth()/ 2, ofGetHeight()/2, 0), // vec pos
+  //   glm::vec3(0, 1, 0) * ofRandom(50, 100),         // vec velocity
+  //   ofColor::white,                                 // color
+  //   ofRandom(1, 5),                                 // life time
+  //   ofRandom(1,10)});                               // particle radius
 }
 
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    emitter->update();
+  float deltaTime = ofGetLastFrameTime();
+  emitter->update(deltaTime);
+
+    // for (auto& el: particles)
+    //   el.update(deltaTime);
+
+    // particles.erase(std::remove_if(
+    //   particles.begin(),
+    //   particles.end(),
+    //   [](Particle& p) { return p.isDead(); }), particles.end());
 }
 
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-    emitter->draw();
+  // for (auto& el: particles)
+    // el.draw();
+  emitter->draw();
 }
 
 //--------------------------------------------------------------
