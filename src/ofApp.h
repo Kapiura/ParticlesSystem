@@ -2,13 +2,15 @@
 
 #include "Particle.hpp"
 #include "Emitter.hpp"
+#include "Menu.hpp"
 #include "ofMain.h"
+#include "ofxGui.h"
 #include <vector>
 
 class ofApp : public ofBaseApp{
 
 	public:
-		~ofApp() { delete emitter; };
+		~ofApp();
 
 		void setup();
 		void update();
@@ -29,4 +31,7 @@ class ofApp : public ofBaseApp{
 	private:
 		// std::vector<Particle> particles;
 		Emitter* emitter;
+		Menu* menu;
+		ofxFloatSlider radius;
+		ofxPanel gui;
 };

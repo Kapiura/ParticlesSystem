@@ -7,10 +7,10 @@ Particle Emitter::emit()
 {
   return Particle(
     glm::vec3(emitPositon),                                              // vec pos
-    glm::vec3(ofRandom(-1,1), ofRandom(-1,1), 0) * ofRandom(50, 100),   // vec velocity
+    glm::vec3(ofRandom(-1,1), ofRandom(-1,1), ofRandom(-1,1)) * ofRandom(50, 100),   // vec velocity
     ofColor(255, 255, ofRandom(0,255)),                                 // color
     ofRandom(1, 5),                                                     // life time
-    ofRandom(1,10));
+    ofRandom(2,3));
 }
 
 void Emitter::update(float deltaTime)

@@ -9,7 +9,6 @@
 class Emitter {
 private:
     glm::vec3 emitPositon;
-    glm::vec3 emitDirection;
     std::vector<Particle> particles;
     std::vector<Particle> deadParticles;
     //std::vector<Force> forces;

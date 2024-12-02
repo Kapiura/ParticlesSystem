@@ -1,23 +1,23 @@
 #include "ofApp.h"
 
+ofApp::~ofApp()
+{
+  delete emitter;
+  delete menu;
+}
+
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-  ofBackground(0);
+  ofBackground(ofColor::white);
   ofEnableDepthTest();
   ofEnableLighting();
 
   emitter = new Emitter(glm::vec3(ofGetWidth()/ 2, ofGetHeight()/2, 0));
-    // glm::vec3(0, 1, 0) * ofRandom(50, 100));
+      gui.setup();
+    gui.add(radius.setup("radius", 140, 10, 300));
+  // menu = new Menu();
 
-
-  // for (int i = 0; i < 1000; i++)
-  //   particles.push_back({
-  //   glm::vec3(ofGetWidth()/ 2, ofGetHeight()/2, 0), // vec pos
-  //   glm::vec3(0, 1, 0) * ofRandom(50, 100),         // vec velocity
-  //   ofColor::white,                                 // color
-  //   ofRandom(1, 5),                                 // life time
-  //   ofRandom(1,10)});                               // particle radius
 }
 
 //--------------------------------------------------------------
@@ -25,22 +25,15 @@ void ofApp::update()
 {
   float deltaTime = ofGetLastFrameTime();
   emitter->update(deltaTime);
-
-    // for (auto& el: particles)
-    //   el.update(deltaTime);
-
-    // particles.erase(std::remove_if(
-    //   particles.begin(),
-    //   particles.end(),
-    //   [](Particle& p) { return p.isDead(); }), particles.end());
 }
 
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-  // for (auto& el: particles)
-    // el.draw();
   emitter->draw();
+      ofDrawCircle(ofGetWidth()/2, ofGetHeight()/2, radius);
+      gui.draw();
+  // menu->draw();
 }
 
 //--------------------------------------------------------------
