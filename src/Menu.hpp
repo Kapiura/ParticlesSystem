@@ -5,20 +5,21 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
-class Menu {
-public:
-  Menu();
+class Menu
+{
+  public:
+	Menu ();
 
-  void draw();
+	void draw ();
 
-  ofxFloatSlider radius;
-  ofxColorSlider color;
-  ofxVec3Slider lightPos;
-  ofxIntSlider lifeTime;
-  ofxIntSlider windStr;
-  ofxButton addWindButton;
-  ofxButton removeWindButton;
-  ofxPanel gui;
+	ofxFloatSlider radius;
+	ofxColorSlider color;
+	ofxVec3Slider lightPos;
+	ofxIntSlider lifeTime;
+	ofxIntSlider windStr;
+	ofxButton addWindButton;
+	ofxButton removeWindButton;
+	ofxPanel gui;
 };
 
 #endif // MENU_HPP

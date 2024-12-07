@@ -1,0 +1,25 @@
+﻿---
+BasedOnStyle: Microsoft
+AlignOperands: true
+BreakBeforeBinaryOperators: All
+Language: Cpp
+NamespaceIndentation: All
+PointerAlignment: Right
+SpaceAfterLogicalNot: true
+SpaceAfterTemplateKeyword: true
+SpaceBeforeParens: Always
+SpaceBeforeRangeBasedForLoopColon: false
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: true
+Standard: Auto
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+BreakBeforeBraces: Allman
+AllowShortFunctionsOnASingleLine: Inline
+ColumnLimit: 120
+AlignTrailingComments: true
+SortIncludes: false
+...
