@@ -172,32 +172,25 @@ void ofApp::drawStar(float x, float y, float z, float radius1, float radius2, in
 void ofApp::drawCone(float x, float y, float radius, float height, float rotation) const {
     ofPushMatrix();
 
-    // Translacja na pozycję
     ofTranslate(x, y);
 
-    // Obrót stożka
     ofRotateDeg(rotation);
 
-    // Definiowanie materiału (kolor stożka)
     ofMaterial material;
     material.setDiffuseColor(ofColor(0, 255, 0));
     material.begin();
 
-    // Tworzenie siatki stożka
     ofMesh mesh;
     mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 
-    // Wierzchołek szczytu stożka
     glm::vec3 tip(0, -height / 2, 0);
 
-    // Dodanie wierzchołków dla podstawy stożka
-    int numSides = 30;  // Liczba segmentów podstawy
+    int numSides = 30;
     float angleStep = TWO_PI / numSides;
     for (int i = 0; i < numSides; i++) {
         float angle = i * angleStep;
         glm::vec3 baseVertex(cos(angle) * radius, height / 2, sin(angle) * radius);
 
-        // Dodawanie trójkątów dla bocznych ścian
         glm::vec3 nextBaseVertex(cos((i + 1) * angleStep) * radius, height / 2, sin((i + 1) * angleStep) * radius);
 
         mesh.addVertex(tip);
@@ -205,13 +198,10 @@ void ofApp::drawCone(float x, float y, float radius, float height, float rotatio
         mesh.addVertex(nextBaseVertex);
     }
 
-    // Rysowanie stożka
     mesh.draw();
 
-    // Kończenie rysowania z materiałem
     material.end();
 
-    // Przywracanie poprzedniej macierzy
     ofPopMatrix();
 }
 
@@ -225,12 +215,12 @@ void ofApp::drawCylinder() const
     ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2, 0);
 
     ofMaterial material;
-    material.setDiffuseColor(ofColor(139, 69, 19));  // Brązowy kolor
-    material.begin();  // Rozpoczęcie rysowania obiektu z materiałem
+    material.setDiffuseColor(ofColor(139, 69, 19));
+    material.begin();
 
-    ofDrawCylinder(0, 300, 50, 200);  // Pozycja 0, 0, 0 oraz promień 50 i wysokość 200
+    ofDrawCylinder(0, 300, 50, 200);
 
-    material.end();  // Zakończenie rysowania z materiałem
+    material.end();
 
     ofPopMatrix();
 }
